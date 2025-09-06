@@ -1,5 +1,6 @@
 package com.practice.JournalApp.controller;
 
+import com.practice.JournalApp.dto.UserDto;
 import com.practice.JournalApp.entity.User;
 import com.practice.JournalApp.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,12 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<User> findByUsername(){
+    public ResponseEntity<UserDto> findByUsername(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        return new ResponseEntity<>(userService.findUserByUsername(username), HttpStatus.OK);
+        User user = userService.findUserByUsername(username);
+        UserDto userDto = new UserDto(user.getId(), user.getUsername(), user.getRoles());
+        return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user){
