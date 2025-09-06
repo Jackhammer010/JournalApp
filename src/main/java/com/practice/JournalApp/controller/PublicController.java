@@ -1,5 +1,6 @@
 package com.practice.JournalApp.controller;
 
+import com.practice.JournalApp.service.TokenBlacklistService;
 import com.practice.JournalApp.service.UserDetailsServiceImpl;
 import com.practice.JournalApp.service.UserService;
 import com.practice.JournalApp.utils.JwtUtils;
@@ -22,6 +23,7 @@ public class PublicController {
     private final AuthenticationManager authenticationManager;
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtUtils jwtUtils;
+    private final TokenBlacklistService tokenBlacklistService;
 
     @GetMapping("/health-check")
     public ResponseEntity<String> healthCheck(){
@@ -46,6 +48,15 @@ public class PublicController {
             log.error("Error occurred while creating jwt token", e);
             return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
         }
+    }
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestHeader("Authorization") String authHeader){
+        if (authHeader != null && authHeader.startsWith("Bearer ")){
+            String token = authHeader.substring(7);
+            long expiration = jwtUtils.getExpirationInMillis(token);
+            tokenBlacklistService.blackListToken(token, expiration);
+        }
+        return ResponseEntity.ok().body("Logged out successfully");
     }
 
 }

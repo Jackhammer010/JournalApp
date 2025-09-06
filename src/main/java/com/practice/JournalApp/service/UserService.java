@@ -15,7 +15,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public User findUserByUsername(String username){
         return userRepository.findByUsername(username);

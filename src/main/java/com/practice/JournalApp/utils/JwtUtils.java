@@ -30,6 +30,10 @@ public class JwtUtils {
         String usernameFromToken = extractUsername(token);
         return usernameFromToken.equals(username) && !isTokenExpired(token);
     }
+    public Long getExpirationInMillis(String token){
+        Date expiration = getTokenExpiration(token);
+        return expiration.getTime() - System.currentTimeMillis();
+    }
     private String createToken(Map<String, String> claims, String subject){
         return Jwts.builder()
                 .claims(claims)
