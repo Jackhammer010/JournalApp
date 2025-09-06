@@ -41,4 +41,10 @@ public class UserController {
             return new ResponseEntity<>("Username must be unique. Provided username already exists.", HttpStatus.FORBIDDEN);
         }
     }
+    @DeleteMapping
+    public ResponseEntity<?> deleteUser(){
+        Authentication authentication = SecurityContextHolder.createEmptyContext().getAuthentication();
+        userService.deleteUserByUsername(authentication.getName());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

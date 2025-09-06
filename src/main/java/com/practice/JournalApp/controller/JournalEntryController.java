@@ -52,6 +52,13 @@ public class JournalEntryController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @PutMapping("/entryId/{id}")
+    public ResponseEntity<?> updateEntryById(@PathVariable String id, @RequestBody JournalEntry entry){
+        ObjectId entryId = new ObjectId(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        return journalService.updateEntryById(username, entryId, entry);
+    }
     @DeleteMapping("entryId/{id}")
     public ResponseEntity<?> deleteById(@PathVariable String id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

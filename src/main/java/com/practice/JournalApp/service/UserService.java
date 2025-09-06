@@ -35,4 +35,7 @@ public class UserService {
         user.setPassword(encodedPassword);
         saveUser(user);
     }
+    public void deleteUserByUsername(String username){
+        userRepository.deleteByUsername(username);
+    }
 }
