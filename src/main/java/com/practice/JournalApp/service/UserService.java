@@ -30,5 +30,9 @@ public class UserService {
         user.setRoles(List.of("USER"));
         userRepository.insert(user);
     }
-
+    public void updateUser(User user){
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        saveUser(user);
+    }
 }
