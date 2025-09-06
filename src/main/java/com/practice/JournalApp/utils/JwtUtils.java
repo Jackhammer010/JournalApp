@@ -15,9 +15,9 @@ import java.util.*;
 public class JwtUtils {
 
     @Value("${jwt.secret.key}")
-    private final String secret;
+    private String secret;
     @Value("${jwt.expiration.minutes}")
-    private final int minutes;
+    private int minutes;
 
     public String generateToken(String username){
         Map<String, String> claims = new HashMap<>();
