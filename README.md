@@ -4,16 +4,16 @@ JournalApp is a personal journaling application built with Java. It helps you ca
 
 ## Features
 
-- **User authentication with JWT tokens**
-- **Logout with token blacklisting via Redis**
 - Create, edit, and delete journal entries
+- User authentication with JWT tokens
+- Logout with token blacklisting via Redis
 - Search and organize your journal
 - Simple, user-friendly interface
-- Local data storage for privacy
+- Secure data storage for privacy
 
 ## Security Highlights
 
-- JWT (JSON Web Token) authentication is used to manage user sessions.
+- JWT (JSON Web Token) authentication is used to manage user requests.
 - Logout is implemented by blacklisting tokens, using Redis for fast and reliable storage of invalidated tokens.
 - Both Redis Cloud (recommended) and local Redis servers are supported. Configure your application properties as needed.
 
