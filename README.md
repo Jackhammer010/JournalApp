@@ -22,6 +22,7 @@ JournalApp is a personal journaling application built with Java. It helps you ca
 ### Prerequisites
 
 - Java Development Kit (JDK) 8 or higher
+- MongoDB instance (Mongo Cloud recommended, or local Mongo server)
 - Redis instance (Redis Cloud recommended, or local Redis server)
 
 ### Installation
@@ -40,14 +41,13 @@ JournalApp is a personal journaling application built with Java. It helps you ca
 3. **Build the project:**
     - Compile using your preferred Java IDE, or from the command line:
       ```bash
-      javac -d bin src/*.java
+      mvn clean package
       ```
 
 4. **Run the application:**
    ```bash
-   java -cp bin Main
+   mvn spring-boot:run
    ```
-   *(Replace `Main` with your actual main class if different.)*
 
 ## Usage
 
